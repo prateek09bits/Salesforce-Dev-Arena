@@ -1,0 +1,148 @@
+<template>
+    <template lwc:if={s}>
+
+        <!-- ============ COUNTDOWN ============ -->
+        <template lwc:if={isStarting}>
+            <section class="panel center start">
+                <p class="muted">Round starts in</p>
+                <p class="bignum display">{secondsLeft}</p>
+                <p class="muted">{s.topic}, {s.level}. {s.total} questions.</p>
+            </section>
+        </template>
+
+        <!-- ============ QUESTION / REVEAL ============ -->
+        <template lwc:elseif={isPlaying}>
+            <div class="layout">
+                <section class="panel qcard">
+                    <div class="qtop">
+                        <div class="meta">
+                            <span class="pill strong">Question {questionNumber} of {s.total}</span>
+                            <span class="pill">{s.question.topic}</span>
+                            <span class="pill">{s.question.level}</span>
+                        </div>
+                        <div class="ring" style={ringStyle}><span class="secs">{secondsLeft}</span></div>
+                    </div>
+
+                    <h2 class="qtext display">{s.question.text}</h2>
+                    <template lwc:if={hasCode}>
+                        <pre class="code"><code>{s.question.code}</code></pre>
+                    </template>
+
+                    <template lwc:if={isQuestion}><p class="muted hint">{hint}</p></template>
+
+                    <ul class="opts">
+                        <template for:each={options} for:item="o">
+                            <li key={o.key}>
+                                <button class={o.cls} data-key={o.key} disabled={o.disabled} onclick={pickOption}>
+                                    <span class="badge">{o.badge}</span>
+                                    <span class="otext">{o.label}</span>
+                                </button>
+                            </li>
+                        </template>
+                    </ul>
+
+                    <template lwc:if={canLockIn}>
+                        <button class="btn btn-primary btn-lg lock" onclick={submit}>Lock in answer</button>
+                    </template>
+                    <template lwc:if={answeredWaiting}>
+                        <p class="muted waiting">Answer locked. Waiting for the timer or other players.</p>
+                    </template>
+
+                    <template lwc:if={isReveal}>
+                        <div class={revealCls}>
+                            <div class="rhead"><strong>{revealTitle}</strong><span class="pts">{pointsLabel}</span></div>
+                            <p class="expl">{s.explanation}</p>
+                            <p class="muted next">Next question in {secondsLeft}s</p>
+                        </div>
+                    </template>
+                    <template lwc:if={error}><p class="err">{error}</p></template>
+                </section>
+
+                <template lwc:if={showBoard}>
+                    <aside class="panel board">
+                        <h3 class="display">Scoreboard</h3>
+                        <ol class="plist">
+                            <template for:each={board} for:item="p">
+                                <li key={p.id} class={p.cls}>
+                                    <span class="prank">{p.rank}</span>
+                                    <span class="pname">{p.nickname}</span>
+                                    <span class="pstate">{p.state}</span>
+                                    <span class="pscore">{p.score}</span>
+                                </li>
+                            </template>
+                        </ol>
+                    </aside>
+                </template>
+            </div>
+        </template>
+
+        <!-- ============ RESULTS ============ -->
+        <template lwc:elseif={isFinished}>
+            <section class="results">
+                <h1 class="display">{resultTitle}</h1>
+                <p class="muted">{resultSub}</p>
+
+                <div class="stats">
+                    <div class="stat"><span class="sv display">{myScore}</span><span class="sl muted">points</span></div>
+                    <div class="stat"><span class="sv display">{correctCount}/{s.total}</span><span class="sl muted">correct</span></div>
+                    <div class="stat"><span class="sv display">{accuracy}%</span><span class="sl muted">accuracy</span></div>
+                </div>
+
+                <template lwc:if={showBoard}>
+                    <div class="panel ranking">
+                        <h2 class="display">Final ranking</h2>
+                        <ol class="rlist">
+                            <template for:each={ranking} for:item="r">
+                                <li key={r.id} class={r.cls}>
+                                    <span class="rk">{r.rank}</span>
+                                    <span class="rn">{r.nickname}</span>
+                                    <span class="rs">{r.scoreLabel}</span>
+                                </li>
+                            </template>
+                        </ol>
+                    </div>
+                </template>
+
+                <template lwc:if={guestNudge}>
+                    <p class="nudge panel">Scores from guest games are not saved. <button class="linkbtn" onclick={goLogin}>Create a profile</button> to track your progress and appear on the leaderboard.</p>
+                </template>
+
+                <div class="actions">
+                    <button class="btn btn-primary btn-lg" onclick={playAgain}>Play again</button>
+                    <button class="btn btn-lg" onclick={toggleReview}>{reviewLabel}</button>
+                    <button class="btn btn-lg" onclick={goHome}>Home</button>
+                </div>
+
+                <template lwc:if={showReview}>
+                    <div class="review">
+                        <template for:each={reviews} for:item="r">
+                            <article key={r.index} class={r.cls}>
+                                <header class="rhd">
+                                    <span class="rnum">Question {r.num}</span>
+                                    <span class="verdict">{r.verdict}</span>
+                                </header>
+                                <p class="rq">{r.text}</p>
+                                <template lwc:if={r.hasCode}><pre class="code"><code>{r.code}</code></pre></template>
+                                <ul class="ropts">
+                                    <template for:each={r.options} for:item="o">
+                                        <li key={o.key} class={o.cls}>
+                                            <span class="badge sm">{o.badge}</span>
+                                            <span class="otext">{o.label}</span>
+                                            <span class="otag">{o.tag}</span>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <p class="expl">{r.explanation}</p>
+                            </article>
+                        </template>
+                    </div>
+                </template>
+            </section>
+        </template>
+    </template>
+
+    <template lwc:else>
+        <p class="muted center loading">Loading the game…</p>
+        <template lwc:if={error}><p class="err center">{error}</p></template>
+    </template>
+</template>

@@ -1,0 +1,152 @@
+<template>
+    <div class="wrap">
+        <div class="tabs" role="tablist">
+            <button class={profileTabCls} role="tab" onclick={showProfileTab}>Profile</button>
+            <button class={leadersTabCls} role="tab" onclick={showLeadersTab}>Leaderboard</button>
+        </div>
+
+        <!-- ================= LEADERBOARD ================= -->
+        <template lwc:if={isLeaders}>
+            <section class="panel">
+                <h1 class="display">Leaderboard</h1>
+                <p class="muted sub">Ranked by total points across all games played while logged in.</p>
+                <template lwc:if={boardEmpty}>
+                    <p class="muted empty">Nobody has scored yet. Play a round while logged in to take the first place.</p>
+                </template>
+                <ol class="blist">
+                    <template for:each={board} for:item="r">
+                        <li key={r.key}>
+                            <button class={r.cls} data-u={r.username} onclick={openUser}>
+                                <span class="rk">{r.rank}</span>
+                                <span class="bav">{r.icon}</span>
+                                <span class="bname">{r.displayName}<span class="muted handle">@{r.username}</span></span>
+                                <span class="bgames muted">{r.gamesWon} wins</span>
+                                <span class="bscore">{r.scoreLabel}</span>
+                            </button>
+                        </li>
+                    </template>
+                </ol>
+            </section>
+        </template>
+
+        <!-- ================= PROFILE ================= -->
+        <template lwc:else>
+            <template lwc:if={noTarget}>
+                <section class="panel center">
+                    <h1 class="display">Your profile lives here</h1>
+                    <p class="muted sub">Log in to see your stats, badges and recent games.</p>
+                    <button class="btn btn-primary btn-lg" onclick={goLogin}>Log in or register</button>
+                </section>
+            </template>
+
+            <template lwc:elseif={loading}>
+                <p class="muted center pad">Loading profile…</p>
+            </template>
+
+            <template lwc:elseif={hasProfile}>
+                <template lwc:if={editing}>
+                    <section class="panel edit">
+                        <h1 class="display">Edit profile</h1>
+                        <div class="stack">
+                            <div>
+                                <label class="label" for="dn">Display name</label>
+                                <input id="dn" class="field" maxlength="30" value={form.displayName} oninput={onName} />
+                            </div>
+                            <div>
+                                <label class="label" for="bio">Bio <span class="muted">({bioCount}/160)</span></label>
+                                <textarea id="bio" class="field" rows="3" maxlength="160" value={form.bio} oninput={onBio}></textarea>
+                            </div>
+                            <div>
+                                <span class="label">Avatar</span>
+                                <div class="avs">
+                                    <template for:each={avatarChoices} for:item="a">
+                                        <button key={a.key} class={a.cls} data-key={a.key} onclick={pickAvatar} aria-label={a.key}>{a.icon}</button>
+                                    </template>
+                                </div>
+                            </div>
+                            <label class="check">
+                                <input type="checkbox" checked={form.isPublic} onchange={onPublic} />
+                                <span>Show my profile on the leaderboard and to other players</span>
+                            </label>
+                        </div>
+                        <template lwc:if={error}><p class="err" role="alert">{error}</p></template>
+                        <div class="actions">
+                            <button class="btn btn-primary" disabled={saving} onclick={save}>{saveLabel}</button>
+                            <button class="btn" onclick={cancelEdit}>Cancel</button>
+                        </div>
+                    </section>
+                </template>
+
+                <template lwc:else>
+                    <section class="panel hero">
+                        <div class="bigav" aria-hidden="true">{avatar}</div>
+                        <div class="who">
+                            <h1 class="display">{profile.displayName}</h1>
+                            <p class="muted handle2">@{profile.username}</p>
+                            <template lwc:if={profile.bio}><p class="bio">{profile.bio}</p></template>
+                            <div class="tags">
+                                <span class="pill strong">{rankLabel}</span>
+                                <template lwc:if={privateNote}><span class="pill">Private profile</span></template>
+                            </div>
+                        </div>
+                        <template lwc:if={isOwner}>
+                            <button class="btn" onclick={startEdit}>Edit profile</button>
+                        </template>
+                    </section>
+
+                    <section class="stats">
+                        <template for:each={stats} for:item="s">
+                            <div key={s.k} class="stat">
+                                <span class="sv display">{s.value}</span>
+                                <span class="sl muted">{s.label}</span>
+                            </div>
+                        </template>
+                    </section>
+
+                    <section class="two">
+                        <div class="panel">
+                            <h2 class="display">Badges</h2>
+                            <template lwc:if={hasBadges}>
+                                <ul class="badges">
+                                    <template for:each={profile.badges} for:item="b">
+                                        <li key={b.key} class="bdg"><span class="bi">{b.icon}</span>{b.label}</li>
+                                    </template>
+                                </ul>
+                            </template>
+                            <template lwc:else>
+                                <p class="muted empty">No badges yet. Finish your first game to earn one.</p>
+                                <button class="btn" onclick={goPlay}>Play a round</button>
+                            </template>
+                        </div>
+
+                        <div class="panel">
+                            <h2 class="display">Recent games</h2>
+                            <template lwc:if={hasGames}>
+                                <ul class="glist">
+                                    <template for:each={games} for:item="g">
+                                        <li key={g.key} class="grow">
+                                            <span class="gt">{g.topicLabel}<span class="muted gl">{g.level}</span></span>
+                                            <span class="muted">{g.date}</span>
+                                            <span class="gp">{g.place}</span>
+                                            <span class="gs">{g.score}</span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                            <template lwc:else>
+                                <p class="muted empty">No games recorded yet.</p>
+                            </template>
+                        </div>
+                    </section>
+                </template>
+            </template>
+
+            <template lwc:elseif={error}>
+                <section class="panel center">
+                    <h1 class="display">We could not open that profile</h1>
+                    <p class="muted sub">{error}</p>
+                </section>
+            </template>
+        </template>
+    </div>
+</template>

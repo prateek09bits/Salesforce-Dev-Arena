@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expires_At__c</fullName>
+    <description>Timestamp after which this game room is considered expired and its Status set to Expired. Note: DateTime fields cannot be declared as externalId; a standard index is not available without Salesforce Support. Queried by the cleanup scheduled Apex job.</description>
+    <inlineHelpText>Calculated at room creation as Created_At + Room_TTL_Hours from Quiz_Config__mdt. Rooms past this time are swept by the cleanup job.</inlineHelpText>
+    <label>Expires At</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

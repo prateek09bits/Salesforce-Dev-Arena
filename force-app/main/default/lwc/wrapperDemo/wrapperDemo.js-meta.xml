@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<isExposed>true</isExposed>
+	<apiVersion>68.0</apiVersion>
+	<targets>
+		<target>lightning__AgentforceOutput</target>
+		<target>lightning__AppPage</target>
+		<target>lightning__HomePage</target>
+		<target>lightning__RecordPage</target>
+	</targets>
+	 <targetConfigs>
+
+        <targetConfig targets="lightning__AgentforceOutput">
+
+            <sourceType name="c__EmployeeOuput"/>
+
+        </targetConfig>
+
+    </targetConfigs>
+</LightningComponentBundle>

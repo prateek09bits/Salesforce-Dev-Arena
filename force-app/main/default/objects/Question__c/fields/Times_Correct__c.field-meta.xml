@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Times_Correct__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Cumulative count of how many times players answered this question correctly across all game rooms.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used to compute the accuracy rate (Times_Correct / Times_Served) for question quality analysis.</inlineHelpText>
+    <label>Times Correct</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

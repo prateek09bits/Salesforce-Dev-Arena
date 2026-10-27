@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Token_Hash__c</fullName>
+    <description>Hashed version of the player session token used to authenticate subsequent requests without storing the raw token.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>SHA-256 hash of the ephemeral session token issued at join time. Stored instead of the raw token for security.</inlineHelpText>
+    <label>Token Hash</label>
+    <length>64</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

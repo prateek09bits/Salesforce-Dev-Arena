@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Host_Player__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Lookup to the Player record that created and is hosting this game room. Cleared if the host player record is deleted.</description>
+    <inlineHelpText>The host controls room start and has additional game-management permissions via Apex.</inlineHelpText>
+    <label>Host Player</label>
+    <referenceTo>Player__c</referenceTo>
+    <relationshipLabel>Hosted Game Rooms</relationshipLabel>
+    <relationshipName>Hosted_Game_Rooms</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

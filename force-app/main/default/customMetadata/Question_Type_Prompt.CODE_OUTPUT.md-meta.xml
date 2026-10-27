@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CODE OUTPUT</label>
+    <protected>false</protected>
+    <values>
+        <field>Question_Type__c</field>
+        <value xsi:type="xsd:string">CODE_OUTPUT</value>
+    </values>
+    <values>
+        <field>Option_Count__c</field>
+        <value xsi:type="xsd:double">4</value>
+    </values>
+    <values>
+        <field>Output_Instructions__c</field>
+        <value xsi:type="xsd:string">Generate a code-output question that shows a snippet of Apex (or SOQL/LWC JavaScript) code and asks what it produces or what error it throws. Return a single valid JSON object with the following fields:
+- "questionText": string, asking what the output or result of the provided code snippet is
+- "code": string, the code snippet to display (use \n for line breaks, indent with spaces not tabs)
+- "options": array of 4 objects each with "id" (A/B/C/D) and "text" (the answer choice representing an output, error, or result)
+- "correctAnswer": string, the single option id that is the correct output/result
+- "explanation": string, 2-3 sentences explaining what the code does step by step and why the correct output is produced
+
+Example output:
+{
+  "questionText": "What is the output of the following Apex code?",
+  "code": "Integer x = 5;\nInteger y = 10;\nSystem.debug(x + y + ' items');\nSystem.debug('' + x + y + ' items');",
+  "options": [
+    {"id": "A", "text": "15 items and 510 items"},
+    {"id": "B", "text": "15 items and 15 items"},
+    {"id": "C", "text": "510 items and 510 items"},
+    {"id": "D", "text": "A runtime exception is thrown"}
+  ],
+  "correctAnswer": "A",
+  "explanation": "In the first debug, x+y evaluates as integer addition (15) before string concatenation. In the second debug, the empty string forces left-to-right string concatenation, making x concatenate to '5' then y appends '10', producing '510 items'."
+}</value>
+    </values>
+</CustomMetadata>

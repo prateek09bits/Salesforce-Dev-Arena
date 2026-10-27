@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Players__c</fullName>
+    <defaultValue>8</defaultValue>
+    <description>Maximum number of players allowed to join this game room. Must be between 1 and 20. Solo mode requires exactly 1.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For Solo mode this is automatically set to 1. Allowed range for Multiplayer: 2 to 20.</inlineHelpText>
+    <label>Max Players</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

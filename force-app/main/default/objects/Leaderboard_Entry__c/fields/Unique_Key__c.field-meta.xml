@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_Key__c</fullName>
+    <caseSensitive>true</caseSensitive>
+    <description>The Player record Id the entry was created from. Guarantees one entry per player per game even when several players poll the finished game at once.</description>
+    <externalId>true</externalId>
+    <label>Unique Key</label>
+    <length>40</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

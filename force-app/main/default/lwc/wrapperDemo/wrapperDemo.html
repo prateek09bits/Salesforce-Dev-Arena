@@ -1,0 +1,88 @@
+<template>
+
+    <lightning-card
+        title="Department Details"
+        icon-name="standard:employee">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Department Information -->
+            <div class="section">
+
+                <h2 class="section-title">
+                    Department
+                </h2>
+
+                <div class="field">
+                    <span class="label">Department Name</span>
+                    <span class="value">
+                        {department.departmentName}
+                    </span>
+                </div>
+
+                <div class="field">
+                    <span class="label">Manager</span>
+                    <span class="value">
+                        {department.managerName}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Employee Wrapper -->
+            <div class="employee-section">
+
+                <h2 class="section-title">
+                    Employee Information
+                </h2>
+
+                <div class="employee-card">
+
+                    <div class="employee-field">
+
+                        <span class="label">
+                            Employee Name
+                        </span>
+
+                        <span class="value">
+                            {employee.employeeName}
+                        </span>
+
+                    </div>
+
+
+                    <div class="employee-field">
+
+                        <span class="label">
+                            Designation
+                        </span>
+
+                        <span class="value">
+                            {employee.designation}
+                        </span>
+
+                    </div>
+
+
+                    <div class="employee-field">
+
+                        <span class="label">
+                            Salary
+                        </span>
+
+                        <span class="value">
+                            ${employee.salary}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

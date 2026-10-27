@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Stores game configuration values (scoring, timing, limits) used by Apex at runtime. Edit the Default record to tune game behaviour without a code deployment.</description>
+    <label>Quiz Config</label>
+    <pluralLabel>Quiz Configs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

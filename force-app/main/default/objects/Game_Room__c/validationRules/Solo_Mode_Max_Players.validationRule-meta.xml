@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solo_Mode_Max_Players</fullName>
+    <active>true</active>
+    <description>Enforces that Solo game rooms can only have one player (Max Players must equal 1 when Mode is Solo).</description>
+    <errorConditionFormula>ISPICKVAL(Mode__c, &apos;Solo&apos;) &amp;&amp; NOT(ISBLANK(Max_Players__c)) &amp;&amp; Max_Players__c != 1</errorConditionFormula>
+    <errorMessage>Solo mode game rooms must have Max Players set to 1.</errorMessage>
+</ValidationRule>

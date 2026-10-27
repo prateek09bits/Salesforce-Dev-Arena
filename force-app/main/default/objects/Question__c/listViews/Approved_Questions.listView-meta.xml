@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approved_Questions</fullName>
+    <columns>NAME</columns>
+    <columns>Question_Type__c</columns>
+    <columns>Level__c</columns>
+    <columns>Topic__c</columns>
+    <columns>Source__c</columns>
+    <columns>Times_Served__c</columns>
+    <columns>Times_Correct__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Approved</value>
+    </filters>
+    <label>Approved Questions</label>
+</ListView>

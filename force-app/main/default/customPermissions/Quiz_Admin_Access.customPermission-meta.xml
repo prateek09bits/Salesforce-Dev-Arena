@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Allows opening the Question Admin page: review, edit and approve questions, add study material and generate questions.</description>
+    <isLicensed>false</isLicensed>
+    <label>Quiz Admin Access</label>
+</CustomPermission>

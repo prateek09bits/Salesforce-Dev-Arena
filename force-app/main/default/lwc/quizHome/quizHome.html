@@ -1,0 +1,59 @@
+<template>
+    <section class="hero">
+        <div class="copy">
+            <h1 class="display">Sharpen your Salesforce skills, one question at a time.</h1>
+            <p class="sub">Short timed rounds on Apex, LWC, SOQL, Flows and more. Play on your own, or share a room code and race your friends on the same questions.</p>
+            <div class="cta-row">
+                <button class="btn btn-primary btn-lg" onclick={playSolo}>Play solo</button>
+                <button class="btn btn-lg" onclick={createRoom}>Create a room</button>
+            </div>
+            <div class="join">
+                <label class="label" for="code">Have a room code?</label>
+                <div class="join-row">
+                    <input id="code" class="field code" maxlength="8" placeholder="ABC123" value={joinCode} oninput={onCode} onkeyup={onCodeKey} />
+                    <button class="btn" onclick={joinRoom}>Join room</button>
+                </div>
+                <template lwc:if={joinError}><p class="err">{joinError}</p></template>
+            </div>
+        </div>
+
+        <figure class="chart" aria-label="Constellation of the eight quiz topics">
+            <svg viewBox="0 0 420 360" role="img" aria-hidden="true">
+                <template for:each={lines} for:item="l">
+                    <line key={l.id} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} class="ln"></line>
+                </template>
+                <template for:each={stars} for:item="s">
+                    <g key={s.name}>
+                        <circle cx={s.x} cy={s.y} r="9" class="halo"></circle>
+                        <circle cx={s.x} cy={s.y} r="3.6" class="dot"></circle>
+                        <text x={s.tx} y={s.ty} text-anchor={s.anchor} class="tag">{s.name}</text>
+                    </g>
+                </template>
+            </svg>
+            <figcaption class="muted">Eight topics, three levels, five question types.</figcaption>
+        </figure>
+    </section>
+
+    <section class="board panel">
+        <div class="board-head">
+            <h2 class="display">Top players</h2>
+            <button class="btn" onclick={openBoard}>Full leaderboard</button>
+        </div>
+        <template lwc:if={hasLeaders}>
+            <ol class="rows">
+                <template for:each={rows} for:item="r">
+                    <li key={r.key}>
+                        <button class="row" data-u={r.username} onclick={openProfile}>
+                            <span class="rk">{r.rank}</span>
+                            <span class="who">{r.displayName}</span>
+                            <span class="sc">{r.scoreLabel}</span>
+                        </button>
+                    </li>
+                </template>
+            </ol>
+        </template>
+        <template lwc:if={showEmpty}>
+            <p class="muted empty">No scores yet. Finish a game while logged in to claim the first spot.</p>
+        </template>
+    </section>
+</template>

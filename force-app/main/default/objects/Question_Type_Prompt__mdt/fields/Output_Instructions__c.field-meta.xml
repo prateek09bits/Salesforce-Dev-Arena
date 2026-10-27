@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Output_Instructions__c</fullName>
+    <description>Detailed prompt instructions injected into the AI model request, specifying the exact JSON output format required for this question type.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Output Instructions</label>
+    <length>5000</length>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>
