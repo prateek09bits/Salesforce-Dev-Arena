@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Correct_Answer__c</fullName>
+    <description>The correct answer value(s) for this question. Single id for MCQ_SINGLE/TRUE_FALSE/CODE_OUTPUT/SCENARIO; JSON array of ids for MCQ_MULTI.</description>
+    <inlineHelpText>For single-answer types store the option id (e.g. A). For MCQ_MULTI store a JSON array (e.g. [&quot;A&quot;,&quot;C&quot;]).</inlineHelpText>
+    <label>Correct Answer</label>
+    <length>5000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

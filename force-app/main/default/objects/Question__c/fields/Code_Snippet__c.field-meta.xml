@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Code_Snippet__c</fullName>
+    <description>Optional code snippet displayed with the question, used for CODE_OUTPUT type questions.</description>
+    <inlineHelpText>Populated only for CODE_OUTPUT questions. Rendered as preformatted code in the UI.</inlineHelpText>
+    <label>Code Snippet</label>
+    <length>10000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>8</visibleLines>
+</CustomField>

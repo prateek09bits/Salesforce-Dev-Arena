@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Random_Key__c</fullName>
+    <description>Random number (0-1) used for pseudo-random SOQL selection of questions without OFFSET limitations.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Populated by Apex at insert time with Math.random(). ORDER BY Random_Key__c WHERE Random_Key__c &gt; :randomSeed enables efficient random sampling.</inlineHelpText>
+    <label>Random Key</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>8</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

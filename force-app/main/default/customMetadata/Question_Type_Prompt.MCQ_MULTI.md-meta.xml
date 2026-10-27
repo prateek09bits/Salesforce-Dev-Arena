@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>MCQ MULTI</label>
+    <protected>false</protected>
+    <values>
+        <field>Question_Type__c</field>
+        <value xsi:type="xsd:string">MCQ_MULTI</value>
+    </values>
+    <values>
+        <field>Option_Count__c</field>
+        <value xsi:type="xsd:double">5</value>
+    </values>
+    <values>
+        <field>Output_Instructions__c</field>
+        <value xsi:type="xsd:string">Generate a multiple-select question with exactly 5 answer options (A, B, C, D, E) where 2 or 3 options are correct. Return a single valid JSON object with the following fields:
+- "questionText": string, the full question (phrase it to indicate multiple answers, e.g. "Select all that apply")
+- "options": array of 5 objects each with "id" (A/B/C/D/E) and "text" (the answer choice)
+- "correctAnswer": JSON array of 2 or 3 option ids that are all correct (e.g. ["A","C"])
+- "explanation": string, 2-3 sentences explaining which options are correct and why the others are not
+
+Example output:
+{
+  "questionText": "Which of the following are valid Apex trigger events? (Select all that apply)",
+  "options": [
+    {"id": "A", "text": "before insert"},
+    {"id": "B", "text": "after undelete"},
+    {"id": "C", "text": "before query"},
+    {"id": "D", "text": "after update"},
+    {"id": "E", "text": "before merge"}
+  ],
+  "correctAnswer": ["A", "B", "D"],
+  "explanation": "Apex supports before/after insert, update, delete and after undelete events. 'before query' and 'before merge' are not valid trigger events in Salesforce."
+}</value>
+    </values>
+</CustomMetadata>

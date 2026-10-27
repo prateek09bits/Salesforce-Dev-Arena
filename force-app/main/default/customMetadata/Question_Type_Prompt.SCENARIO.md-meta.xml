@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>SCENARIO</label>
+    <protected>false</protected>
+    <values>
+        <field>Question_Type__c</field>
+        <value xsi:type="xsd:string">SCENARIO</value>
+    </values>
+    <values>
+        <field>Option_Count__c</field>
+        <value xsi:type="xsd:double">4</value>
+    </values>
+    <values>
+        <field>Output_Instructions__c</field>
+        <value xsi:type="xsd:string">Generate a scenario-based question that presents a realistic Salesforce business or technical situation in 3-4 sentences, then asks the player to choose the best action, solution, or expected behaviour. Return a single valid JSON object with the following fields:
+- "questionText": string, the full scenario (3-4 sentences) followed by a clear question (e.g. "What should the developer do?", "What is the expected outcome?")
+- "options": array of 4 objects each with "id" (A/B/C/D) and "text" (a plausible course of action or outcome)
+- "correctAnswer": string, the single option id representing the best or correct answer
+- "explanation": string, 2-3 sentences explaining why the chosen answer is optimal and what the drawbacks of the other options are
+
+Example output:
+{
+  "questionText": "A developer needs to update 50,000 Account records nightly to recalculate a custom score field based on related Opportunity data. The org has other scheduled jobs running at the same time. The developer writes a single scheduled Apex class that queries all 50,000 accounts in one SOQL call and updates them in a loop. What problem will this approach cause?",
+  "options": [
+    {"id": "A", "text": "It will exceed the 50,000 record DML row limit and throw a LimitException"},
+    {"id": "B", "text": "It will succeed because scheduled Apex has elevated governor limits"},
+    {"id": "C", "text": "It will fail due to the 50,000 SOQL row limit and require Batch Apex instead"},
+    {"id": "D", "text": "It will run correctly but lock all Account records for the duration"}
+  ],
+  "correctAnswer": "C",
+  "explanation": "Synchronous Apex has a limit of 50,000 rows returned by SOQL per transaction. To process 50,000+ records you must use Batch Apex, which processes records in chunks (up to 2,000 per execute() call) and has its own governor limits per chunk. Scheduled Apex does not have elevated limits compared to synchronous Apex."
+}</value>
+    </values>
+</CustomMetadata>

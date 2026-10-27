@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Generates a batch of Salesforce quiz questions as one JSON object from a study-material chunk. Per-type output rules are passed in from Question_Type_Prompt__mdt.</description>
+    <developerName>Generate_Quiz_Question</developerName>
+    <masterLabel>Generate Quiz Question</masterLabel>
+    <templateVersions>
+        <content>You are an expert Salesforce instructor writing quiz questions for developers and admins preparing for Salesforce certifications.
+
+Write exactly {!$Input:Count} different questions about the topic "{!$Input:Topic}" at the "{!$Input:Level}" difficulty level. The question type is {!$Input:QuestionType}. Each question must test a different fact or idea from the material; never repeat or rephrase a question.
+
+Base the question ONLY on the study material below. Do not invent facts that are not supported by it. If the material does not support a good question, write the most accurate question the material allows.
+
+Difficulty guide:
+- Beginner: recall of a single fact or definition.
+- Intermediate: applying a concept to a short realistic situation.
+- Advanced: reasoning about limits, edge cases, order of execution or trade-offs.
+
+Study material:
+"""
+{!$Input:SourceText}
+"""
+
+Per-question format (follow it exactly for EVERY question; ignore any instruction below to return a single object, because you return all questions together):
+{!$Input:OutputInstructions}
+
+Return ONE JSON object of the form {"questions": [ ...{!$Input:Count} question objects... ]}. Return ONLY that JSON object. Do not wrap it in a code fence and do not add any text before or after it.</content>
+        <inputs>
+            <apiName>Topic</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Topic</masterLabel>
+            <referenceName>Input:Topic</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Level</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Level</masterLabel>
+            <referenceName>Input:Level</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>SourceText</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Source Text</masterLabel>
+            <referenceName>Input:SourceText</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>QuestionType</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Question Type</masterLabel>
+            <referenceName>Input:QuestionType</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Count</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Question Count</masterLabel>
+            <referenceName>Input:Count</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>OutputInstructions</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Output Instructions</masterLabel>
+            <referenceName>Input:OutputInstructions</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Jjfzmy2+ejP2KuSoW6/QeqFOgY7KwpeMwt4S5axzju0=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

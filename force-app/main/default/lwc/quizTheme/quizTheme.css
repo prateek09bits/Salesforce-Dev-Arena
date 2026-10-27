@@ -1,0 +1,77 @@
+:host {
+  /* ---- design tokens: "observatory at night" ---- */
+  --bg: #070b1d;
+  --bg-2: #0e1531;
+  --surface: rgba(255, 238, 200, 0.035);
+  --surface-2: rgba(255, 238, 200, 0.08);
+  --border: rgba(255, 238, 200, 0.12);
+  --border-strong: rgba(255, 238, 200, 0.26);
+  --text: #f3ecda;
+  --muted: #9ba3c2;
+  --accent: #ffb454;
+  --accent-ink: #1c1304;
+  --accent-2: #5eead4;
+  --good: #5eead4;
+  --bad: #ff7d8c;
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+  background: var(--bg);
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+.sky {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(900px 520px at 88% -8%, rgba(255, 180, 84, 0.13), transparent 62%),
+    radial-gradient(800px 600px at -8% 105%, rgba(86, 104, 255, 0.2), transparent 60%),
+    radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 34% 64%, #ffe9c2 50%, transparent 51%),
+    radial-gradient(1px 1px at 58% 26%, #fff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 77% 72%, #cdd6ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 91% 44%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 46% 90%, #ffe9c2 50%, transparent 51%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+}
+.frame { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 0 22px; min-height: 100vh; display: flex; flex-direction: column; }
+
+.bar { display: flex; align-items: center; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+button { font: inherit; color: inherit; cursor: pointer; }
+.brand { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; }
+.mark { position: relative; width: 30px; height: 30px; display: inline-block; }
+.orbit { position: absolute; inset: 3px 0; border: 1.5px solid var(--accent); border-radius: 50%; transform: rotate(-24deg) scaleY(.42); }
+.star { position: absolute; left: 10px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px 2px rgba(255, 180, 84, .6); }
+.name { font-family: var(--display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+.links { display: flex; gap: 4px; margin-left: 8px; flex: 1; }
+.link { background: none; border: 0; padding: 8px 12px; border-radius: 8px; color: var(--muted); }
+.link:hover { color: var(--text); background: var(--surface); }
+.link.current { color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); border-radius: 0; }
+.who { display: flex; align-items: center; gap: 10px; }
+.me { display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px 4px 4px; }
+.me:hover { border-color: var(--border-strong); }
+.av { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: .85rem; }
+.nm { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .92rem; }
+.ghost { background: none; border: 0; color: var(--muted); padding: 8px; }
+.ghost:hover { color: var(--text); }
+.cta { background: var(--accent); color: var(--accent-ink); border: 0; font-weight: 600; padding: 9px 18px; border-radius: 10px; }
+.cta:hover { background: #ffc577; }
+button:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
+.main { flex: 1; padding: 36px 0 56px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 20px 0 28px; border-top: 1px solid var(--border); font-size: .85rem; color: var(--muted); }
+.muted { opacity: .8; }
+
+@media (max-width: 720px) {
+  .bar { flex-wrap: wrap; gap: 10px 14px; }
+  .links { order: 3; width: 100%; margin: 0; flex: none; }
+  .who { margin-left: auto; }
+  .nm { display: none; }
+  .me { padding-right: 4px; }
+  .main { padding-top: 24px; }
+}

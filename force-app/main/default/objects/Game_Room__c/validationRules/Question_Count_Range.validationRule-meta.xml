@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Question_Count_Range</fullName>
+    <active>true</active>
+    <description>Ensures Question Count is between 5 and 20 inclusive.</description>
+    <errorConditionFormula>NOT(ISBLANK(Question_Count__c)) &amp;&amp; (Question_Count__c &lt; 5 || Question_Count__c &gt; 20)</errorConditionFormula>
+    <errorMessage>Question Count must be between 5 and 20.</errorMessage>
+</ValidationRule>

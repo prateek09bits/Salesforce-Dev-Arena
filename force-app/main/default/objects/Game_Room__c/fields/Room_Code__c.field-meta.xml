@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Room_Code__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>6-character alphanumeric code that players enter to join this game room. Must be unique across all rooms.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Share this code with players who want to join. Generated automatically at room creation.</inlineHelpText>
+    <label>Room Code</label>
+    <length>6</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

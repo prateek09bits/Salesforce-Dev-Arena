@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Selected_Answer__c</fullName>
+    <description>The answer option id(s) selected by the player. Single value for single-answer types; comma-separated or JSON array for MCQ_MULTI.</description>
+    <label>Selected Answer</label>
+    <length>1000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Options_JSON__c</fullName>
+    <description>JSON array of answer options for this question. Format: [{&quot;id&quot;:&quot;A&quot;,&quot;text&quot;:&quot;...&quot;}].</description>
+    <inlineHelpText>Serialised JSON array. Each element must have id (A/B/C/D) and text properties. Parsed by the LWC to render answer buttons.</inlineHelpText>
+    <label>Options JSON</label>
+    <length>10000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

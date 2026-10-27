@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_Approve_AI_Questions__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>When checked, AI-generated questions are automatically set to Approved status instead of Draft. Use with caution in production.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Auto Approve AI Questions</label>
+    <type>Checkbox</type>
+</CustomField>

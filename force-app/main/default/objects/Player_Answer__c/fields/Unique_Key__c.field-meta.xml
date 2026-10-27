@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_Key__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Composite key built from Player ID and Room Question ID to prevent a player from submitting multiple answers to the same question. Format: {PlayerId}_{RoomQuestionId}.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Populated by Apex at insert time. The unique constraint prevents double-submit attacks.</inlineHelpText>
+    <label>Unique Key</label>
+    <length>100</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

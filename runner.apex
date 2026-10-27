@@ -1,0 +1,1 @@
+QuestionSeeder.seed();

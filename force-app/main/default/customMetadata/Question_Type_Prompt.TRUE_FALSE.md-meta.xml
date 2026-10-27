@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>TRUE FALSE</label>
+    <protected>false</protected>
+    <values>
+        <field>Question_Type__c</field>
+        <value xsi:type="xsd:string">TRUE_FALSE</value>
+    </values>
+    <values>
+        <field>Option_Count__c</field>
+        <value xsi:type="xsd:double">2</value>
+    </values>
+    <values>
+        <field>Output_Instructions__c</field>
+        <value xsi:type="xsd:string">Generate a true/false question with exactly 2 answer options. Return a single valid JSON object with the following fields:
+- "questionText": string, a statement that is either definitively true or definitively false
+- "options": array of exactly 2 objects: [{"id":"A","text":"True"},{"id":"B","text":"False"}]
+- "correctAnswer": string, either "A" (True) or "B" (False)
+- "explanation": string, 2-3 sentences explaining why the statement is true or false and providing the correct factual context
+
+Example output:
+{
+  "questionText": "A Salesforce Flow launched by a Process Builder runs in System context and bypasses sharing rules.",
+  "options": [
+    {"id": "A", "text": "True"},
+    {"id": "B", "text": "False"}
+  ],
+  "correctAnswer": "A",
+  "explanation": "Flows launched via Process Builder run in System context by default, meaning they ignore the sharing rules of the running user. This is important to consider when designing flows that access records the user may not normally see."
+}</value>
+    </values>
+</CustomMetadata>

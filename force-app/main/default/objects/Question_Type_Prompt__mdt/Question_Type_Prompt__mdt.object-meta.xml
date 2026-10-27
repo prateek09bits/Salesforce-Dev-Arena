@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Stores the AI output-format instructions for each question type, keyed by type identifier. Used by the AI generation Apex class to tailor the prompt per type.</description>
+    <label>Question Type Prompt</label>
+    <pluralLabel>Question Type Prompts</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

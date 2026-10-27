@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Question__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Lookup to the Question record that is assigned to this position in the game room question sequence.</description>
+    <label>Question</label>
+    <referenceTo>Question__c</referenceTo>
+    <relationshipLabel>Room Questions</relationshipLabel>
+    <relationshipName>Room_Questions</relationshipName>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

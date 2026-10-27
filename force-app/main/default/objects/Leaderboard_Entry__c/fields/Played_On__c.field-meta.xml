@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Played_On__c</fullName>
+    <description>Date (not datetime) when the game session was completed, used for daily/weekly leaderboard filtering.</description>
+    <label>Played On</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

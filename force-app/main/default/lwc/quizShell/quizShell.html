@@ -1,0 +1,91 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-15-2026
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template lwc:if={fatal}>
+    <p style="padding:16px;margin:0;background:#3b0d14;color:#ffd5da;font-family:sans-serif">
+        AstroQuiz error: {fatal}
+    </p>
+</template>
+    <c-quiz-theme me={me} page={page} onnavigate={handleNavigate} onlogout={handleLogout}>
+        <template lwc:if={ready}>
+            <template lwc:if={isHome}>
+                <c-quiz-home me={me} onnavigate={handleNavigate}></c-quiz-home>
+            </template>
+
+            <template lwc:elseif={isLogin}>
+                <section class="auth panel">
+                    <h1 class="display">{authTitle}</h1>
+                    <p class="muted lead">A profile keeps your score, badges and answer history. You can still play without one.</p>
+
+                    <div class="tabs" role="tablist">
+                        <button class={loginTabCls} role="tab" data-tab="login" onclick={pickTab}>Log in</button>
+                        <button class={registerTabCls} role="tab" data-tab="register" onclick={pickTab}>Register</button>
+                    </div>
+
+                    <div class="stack" onkeyup={onKey}>
+                        <div>
+                            <label class="label" for="u">Username</label>
+                            <input id="u" class="field" name="username" autocomplete="username" maxlength="20" value={username} oninput={onInput} placeholder="letters, numbers, underscore" />
+                        </div>
+                        <template lwc:if={isRegisterTab}>
+                            <div>
+                                <label class="label" for="d">Display name</label>
+                                <input id="d" class="field" name="displayName" maxlength="30" value={displayName} oninput={onInput} placeholder="Shown on the leaderboard" />
+                            </div>
+                        </template>
+                        <div>
+                            <label class="label" for="p">Password</label>
+                            <input id="p" class="field" type="password" name="password" autocomplete="current-password" maxlength="100" value={password} oninput={onInput} placeholder="At least 8 characters" />
+                        </div>
+                    </div>
+
+                    <template lwc:if={authError}><p class="err" role="alert">{authError}</p></template>
+                    <button class="btn btn-primary btn-lg wide" disabled={authBusy} onclick={submitAuth}>{authCta}</button>
+                </section>
+            </template>
+
+            <template lwc:elseif={isPlay}>
+                <c-quiz-setup view="setup" play-mode={playMode} me={me} session-token={sessionToken}
+                    onnavigate={handleNavigate} onplayerready={handlePlayerReady} ontoast={handleToast}></c-quiz-setup>
+            </template>
+
+            <template lwc:elseif={isRoom}>
+                <template lwc:if={hasRoomCode}>
+                    <template lwc:if={roomLive}>
+                        <c-quiz-arena code={roomCode} me={me} session-token={sessionToken} player-token={playerToken}
+                            onnavigate={handleNavigate} onplayerlost={handlePlayerLost} ontoast={handleToast}></c-quiz-arena>
+                    </template>
+                    <template lwc:else>
+                        <c-quiz-setup view="lobby" code={roomCode} me={me} session-token={sessionToken} player-token={playerToken}
+                            onnavigate={handleNavigate} onplayerready={handlePlayerReady} onplayerlost={handlePlayerLost}
+                            onstatuschange={handleStatusChange} ontoast={handleToast}></c-quiz-setup>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <section class="auth panel">
+                        <h1 class="display">Which room?</h1>
+                        <p class="muted lead">Open a room link, or enter a code on the home page.</p>
+                        <button class="btn btn-primary" onclick={goHome}>Back home</button>
+                    </section>
+                </template>
+            </template>
+
+            <template lwc:elseif={isProfile}>
+                <c-quiz-profile username={profileUser} tab={profileTab} me={me} session-token={sessionToken}
+                    onnavigate={handleNavigate} onprofileupdated={handleProfileUpdated} ontoast={handleToast}></c-quiz-profile>
+            </template>
+        </template>
+        <template lwc:else>
+            <p class="boot muted">Opening the observatory…</p>
+        </template>
+    </c-quiz-theme>
+
+    <template lwc:if={toast}>
+        <div class={toast.cls} role="status" aria-live="polite">{toast.message}</div>
+    </template>
+</template>

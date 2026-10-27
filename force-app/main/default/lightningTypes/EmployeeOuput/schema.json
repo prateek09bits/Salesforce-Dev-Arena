@@ -1,0 +1,5 @@
+{
+  "description" : "It gives employee output",
+  "lightning:type" : "@apexClassType/c__WrapperDemoController$DepartmentWrapper",
+  "title" : "EmployeeOuput"
+}

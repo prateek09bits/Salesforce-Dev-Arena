@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chunk_Count__c</fullName>
+    <description>Roll-up count of all Material Chunk records associated with this Study Material.</description>
+    <inlineHelpText>Automatically computed. Increases as text chunks are created during processing.</inlineHelpText>
+    <label>Chunk Count</label>
+    <summaryForeignKey>Material_Chunk__c.Study_Material__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

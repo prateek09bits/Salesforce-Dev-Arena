@@ -1,0 +1,134 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-15-2026
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- ============ SETUP ============ -->
+    <template lwc:if={isSetup}>
+        <section class="wrap">
+            <h1 class="display">{heading}</h1>
+            <p class="muted intro">{intro}</p>
+
+            <div class="panel form">
+                <div class="block">
+                    <span class="label">Level</span>
+                    <div class="levels">
+                        <template for:each={levels} for:item="l">
+                            <button key={l.value} class={l.cls} data-value={l.value} onclick={pickLevel}>
+                                <strong>{l.value}</strong>
+                                <span class="muted small">{l.desc}</span>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <span class="label">Topic</span>
+                    <div class="chips">
+                        <template for:each={topics} for:item="t">
+                            <button key={t.value} class={t.cls} data-value={t.value} onclick={pickTopic}>{t.label}</button>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="block">
+    <span class="label">Question types ({typesSummary})</span>
+    <div class="chips">
+        <template for:each={types} for:item="t">
+            <button key={t.value} class={t.cls} data-value={t.value} onclick={toggleType}>{t.text}</button>
+        </template>
+        <button class="pick" onclick={selectAllTypes}>Select all types</button>
+    </div>
+</div>
+
+                <div class="two">
+                    <div class="block">
+                        <label class="label" for="count">Questions: <span class="num">{count}</span></label>
+                        <input id="count" class="range" type="range" min="5" max="30" step="1" value={count} oninput={onCount} />
+                    </div>
+                    <div class="block">
+                        <span class="label">Time per question</span>
+                        <div class="chips">
+                            <template for:each={secondOptions} for:item="s">
+                                <button key={s.value} class={s.cls} data-value={s.value} onclick={pickSeconds}>{s.label}</button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <template lwc:if={needsNickname}>
+                    <div class="block nick">
+                        <label class="label" for="nick">Your nickname</label>
+                        <input id="nick" class="field" maxlength="20" value={nickname} oninput={onNick} placeholder="Shown to other players" />
+                    </div>
+                </template>
+
+                <template lwc:if={error}><p class="err" role="alert">{error}</p></template>
+                <button class="btn btn-primary btn-lg go" disabled={busy} onclick={create}>{cta}</button>
+            </div>
+        </section>
+    </template>
+
+    <!-- ============ LOBBY ============ -->
+    <template lwc:else>
+        <section class="wrap">
+            <template lwc:if={hasJoined}>
+                <h1 class="display">Waiting room</h1>
+                <p class="muted intro">{lobbyInfo}</p>
+
+                <div class="lobby">
+                    <div class="panel share">
+                        <span class="label">Room code</span>
+                        <div class="tiles" aria-label="Room code">
+                            <template for:each={roomCodeChars} for:item="ch">
+                                <span key={ch.id} class="tile">{ch.c}</span>
+                            </template>
+                        </div>
+                        <div class="share-actions">
+                            <button class="btn" onclick={copyCode}>Copy code</button>
+                            <button class="btn" onclick={copyLink}>Copy invite link</button>
+                        </div>
+                    </div>
+
+                    <div class="panel roster">
+                        <div class="roster-head">
+                            <h2 class="display">Players</h2>
+                            <span class="pill">{playerCount} in the room</span>
+                        </div>
+                        <ul class="plist">
+                            <template for:each={players} for:item="p">
+                                <li key={p.id} class={p.cls}>
+                                    <span class="pn">{p.nickname}</span>
+                                    <template lwc:if={p.isHost}><span class="pill host">Host</span></template>
+                                    <template lwc:if={p.isMe}><span class="pill">You</span></template>
+                                </li>
+                            </template>
+                        </ul>
+                        <template lwc:if={isHost}>
+                            <button class="btn btn-primary btn-lg" disabled={starting} onclick={start}>{startLabel}</button>
+                        </template>
+                        <template lwc:else>
+                            <p class="muted wait">Waiting for the host to start the game.</p>
+                        </template>
+                        <button class="leave" onclick={leave}>Leave room</button>
+                    </div>
+                </div>
+                <template lwc:if={error}><p class="err" role="alert">{error}</p></template>
+            </template>
+
+            <template lwc:else>
+                <div class="panel joincard">
+                    <h1 class="display">Join room {code}</h1>
+                    <p class="muted intro">Pick a nickname so friends know who is who.</p>
+                    <label class="label" for="jn">Nickname</label>
+                    <input id="jn" class="field" maxlength="20" value={joinNick} placeholder={joinPlaceholder} oninput={onJoinNick} onkeyup={onJoinKey} />
+                    <template lwc:if={error}><p class="err" role="alert">{error}</p></template>
+                    <button class="btn btn-primary btn-lg go" disabled={busy} onclick={join}>Join the room</button>
+                </div>
+            </template>
+        </section>
+    </template>
+</template>

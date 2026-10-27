@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nickname__c</fullName>
+    <description>Display name chosen by the player when joining the game room. Must be unique within a room.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Up to 20 characters. Used on the leaderboard and score screen.</inlineHelpText>
+    <label>Nickname</label>
+    <length>20</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

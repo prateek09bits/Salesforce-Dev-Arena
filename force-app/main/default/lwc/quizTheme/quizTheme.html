@@ -1,0 +1,35 @@
+<template>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="frame">
+        <header class="bar">
+            <button class="brand" data-page="home" onclick={go} aria-label="AstroQuiz home">
+                <span class="mark" aria-hidden="true"><span class="orbit"></span><span class="star"></span></span>
+                <span class="name">AstroQuiz</span>
+            </button>
+            <nav class="links" aria-label="Primary">
+                <button class={homeCls} data-page="home" onclick={go}>Home</button>
+                <button class={playCls} data-page="play" onclick={go}>Play</button>
+                <button class={boardCls} onclick={goBoard}>Leaderboard</button>
+            </nav>
+            <div class="who">
+                <template lwc:if={isLoggedIn}>
+                    <button class="me" data-page="profile" onclick={go} title="Your profile">
+                        <span class="av">{initial}</span>
+                        <span class="nm">{me.displayName}</span>
+                    </button>
+                    <button class="ghost" onclick={logout}>Log out</button>
+                </template>
+                <template lwc:else>
+                    <button class="cta" data-page="login" onclick={go}>Log in</button>
+                </template>
+            </div>
+        </header>
+
+        <main class="main"><slot></slot></main>
+
+        <footer class="foot">
+            <span>AstroQuiz is a practice arena for Salesforce developers.</span>
+            <span class="muted">Questions are reviewed before they reach the bank.</span>
+        </footer>
+    </div>
+</template>
